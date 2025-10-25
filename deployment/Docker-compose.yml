@@ -11,9 +11,11 @@ services:
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:9093,CONTROLLER://0.0.0.0:9094
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
+
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9094
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
@@ -61,7 +63,7 @@ services:
 
   producer:
     build:
-      context: .
+      context: ..
       dockerfile: deployment/Dockerfile
     container_name: log-producer
     depends_on:
@@ -71,14 +73,14 @@ services:
       KAFKA_BROKER: kafka:9092
       TOPIC_NAME: application-logs
       LOGS_PER_SECOND: 5
-    command: python application/producer.py
+    command: python producer.py
     networks:
       - log-network
     restart: unless-stopped
 
   consumer:
     build:
-      context: .
+      context: ..
       dockerfile: deployment/Dockerfile
     container_name: log-consumer
     depends_on:
@@ -92,7 +94,7 @@ services:
       ELASTICSEARCH_HOST: http://elasticsearch:9200
       CONSUMER_GROUP: log-consumer-group
       BATCH_SIZE: 100
-    command: python application/consumer.py
+    command: python consumer.py
     networks:
       - log-network
     restart: unless-stopped
