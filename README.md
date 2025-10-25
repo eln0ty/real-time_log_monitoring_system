@@ -2,11 +2,6 @@
 
 An end-to-end demo pipeline that generates synthetic application logs, streams them through Kafka, and indexes them into Elasticsearch. This system provides a robust solution for real-time log aggregation, processing, and analysis, enabling efficient monitoring and troubleshooting of distributed applications.
 
-## Prerequisites
-
-- Docker Engine 24.x or newer and the `docker compose` plugin.
-- At least 4 GB of free memory; Elasticsearch and Kibana are memory-intensive.
-
 ## Quick Start
 
 ```bash
