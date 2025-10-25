@@ -1,4 +1,4 @@
-# Log Monitoring System
+# Real-time Log Monitoring System
 
 An end-to-end demo pipeline that generates synthetic application logs, streams them through Kafka, and indexes them into Elasticsearch. This system provides a robust solution for real-time log aggregation, processing, and analysis, enabling efficient monitoring and troubleshooting of distributed applications.
 
